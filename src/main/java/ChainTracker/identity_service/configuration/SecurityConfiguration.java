@@ -17,22 +17,11 @@ public class SecurityConfiguration {
     public SecurityFilterChain filterChain(HttpSecurity http){
         http.csrf(csrf -> csrf.disable());
         http.authorizeHttpRequests(auth -> {
-            auth.requestMatchers("api/auth/**").permitAll();
+            auth.requestMatchers("/api/auth/**").permitAll();
             auth.anyRequest().authenticated();
         });
         http.oauth2ResourceServer(oauth2 -> oauth2.jwt(Customizer.withDefaults()));
         return http.build();
     }
 
-
-    @Bean
-    public Keycloak keycloakAdmin(){
-        return KeycloakBuilder.builder()
-                .serverUrl("http://localhost:8081")
-                .realm("ChainTracker")
-                .clientId("identity-service")
-                .clientSecret("t0SrZAcg3ophqXbqrqbgKV7BeUv8ckBOQXxTs3Hr8nx5jqy7LArTFE102PSqjQVKgteFNOF7TBnagsrzdWtqYP")
-                .grantType("CLIENT_CREDENTIALS")
-                .build();
-    }
 }

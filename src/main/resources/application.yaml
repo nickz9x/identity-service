@@ -1,7 +1,11 @@
 server:
-  port: 8081
+  port: 8080
 
 spring:
+  datasource:
+    url: jdbc:postgresql://localhost:5432/identityService
+    username: user
+    password: postgres
   security:
     oauth2:
       resourceserver:
