@@ -1,0 +1,12 @@
+server:
+  port: 8081
+
+spring:
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          # URL base que emite os tokens
+          issuer-uri: http://localhost:8080/realms/ChainTracker
+          # Endpoint onde o Spring baixa as chaves públicas para validar o JWT localmente
+          jwk-set-uri: http://localhost:8080/realms/ChainTracker/protocol/openid-connect/certs
