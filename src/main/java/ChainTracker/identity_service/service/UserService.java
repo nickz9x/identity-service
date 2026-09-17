@@ -47,14 +47,13 @@ import java.util.Collections;
         public AccessTokenResponse login(UserLoginDto dto){
             Keycloak build = KeycloakBuilder.builder()
                     .username(dto.username())
-                    .password(dto.senha())
+                    .password(dto.password())
                     .serverUrl("http://localhost:8081")
                     .realm(realm)
                     .grantType("password")
                     .clientId("identity-service")
-                    .clientSecret("gfRTzEHqLtpke6zZPZKWfdji6WMmJtJS99zxt0NJ8Cl5HRBjDui1ElOUkGtQGjkHf9k2Ir9nsYzYqiDlHo57tp")
+                    .clientSecret("V13fHqYbSPL5On8UzOdBinltpNqtIIQw8GW7slulDyvGkv75PVv8dWP7C8rMD5zKvv2CQS1hN4lroSAhwKYson")
                     .build();
             return build.tokenManager().getAccessToken();
-
         }
     }

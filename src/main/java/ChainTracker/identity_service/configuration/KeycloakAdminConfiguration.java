@@ -13,7 +13,7 @@ public class KeycloakAdminConfiguration {
                 .serverUrl("http://localhost:8081")
                 .realm("ChainTracker")
                 .clientId("identity-service")
-                .clientSecret("gfRTzEHqLtpke6zZPZKWfdji6WMmJtJS99zxt0NJ8Cl5HRBjDui1ElOUkGtQGjkHf9k2Ir9nsYzYqiDlHo57tp")
+                .clientSecret("V13fHqYbSPL5On8UzOdBinltpNqtIIQw8GW7slulDyvGkv75PVv8dWP7C8rMD5zKvv2CQS1hN4lroSAhwKYson")
                 .grantType("client_credentials")
                 .build();
     }
