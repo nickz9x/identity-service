@@ -4,20 +4,29 @@ import ChainTracker.identity_service.dto.UserLoginDto;
 import ChainTracker.identity_service.dto.UserRegisterDto;
 import jakarta.ws.rs.core.Response;
 import lombok.AllArgsConstructor;
+import lombok.RequiredArgsConstructor;
+import org.keycloak.OAuth2Constants;
 import org.keycloak.admin.client.Keycloak;
 import org.keycloak.admin.client.KeycloakBuilder;
 import org.keycloak.representations.AccessTokenResponse;
 import org.keycloak.representations.idm.CredentialRepresentation;
 import org.keycloak.representations.idm.UserRepresentation;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import java.util.Collections;
 
     @Service
-    @AllArgsConstructor
+    @RequiredArgsConstructor
     public class UserService {
+
         private final Keycloak keycloak;
+
         private final String realm = "ChainTracker";
+
+        @Value("${security.client-secret}")
+        private String clientSecret;
 
 
 
@@ -44,16 +53,25 @@ import java.util.Collections;
             }
         }
 
-        public AccessTokenResponse login(UserLoginDto dto){
-            Keycloak build = KeycloakBuilder.builder()
-                    .username(dto.username())
-                    .password(dto.password())
-                    .serverUrl("http://localhost:8081")
-                    .realm(realm)
-                    .grantType("password")
-                    .clientId("identity-service")
-                    .clientSecret("V13fHqYbSPL5On8UzOdBinltpNqtIIQw8GW7slulDyvGkv75PVv8dWP7C8rMD5zKvv2CQS1hN4lroSAhwKYson")
-                    .build();
-            return build.tokenManager().getAccessToken();
+        public AccessTokenResponse login(UserLoginDto dto) {
+            try {
+                Keycloak build = KeycloakBuilder.builder()
+                        .serverUrl("http://localhost:8081")
+                        .realm(realm) // Certifique-se de que o nome está idêntico ao do Keycloak
+                        .clientId("identity-service")
+                        .clientSecret(clientSecret) // Obrigatório já que Client Authentication está ON
+                        .grantType(OAuth2Constants.PASSWORD) // Força o fluxo de senha correto
+                        .username(dto.username())
+                        .password(dto.password())
+                        .authorization(null) // Evita buscas administrativas automáticas que geram 400/403
+                        .build();
+
+                return build.tokenManager().getAccessToken();
+            } catch (jakarta.ws.rs.BadRequestException e) {
+                // Captura o erro e tenta ler o que o Keycloak respondeu no corpo do HTTP
+                String errorResponseBody = e.getResponse().readEntity(String.class);
+                System.err.println("Erro detalhado do Keycloak: " + errorResponseBody);
+                throw e;
+            }
         }
     }

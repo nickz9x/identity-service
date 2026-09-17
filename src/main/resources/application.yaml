@@ -14,3 +14,5 @@ spring:
           issuer-uri: http://localhost:8080/realms/ChainTracker
           # Endpoint onde o Spring baixa as chaves públicas para validar o JWT localmente
           jwk-set-uri: http://localhost:8080/realms/ChainTracker/protocol/openid-connect/certs
+security:
+  client-secret: "gfRTzEHqLtpke6zZPZKWfdji6WMmJtJS99zxt0NJ8Cl5HRBjDui1ElOUkGtQGjkHf9k2Ir9nsYzYqiDlHo57tp"
