@@ -10,9 +10,10 @@ spring:
     oauth2:
       resourceserver:
         jwt:
-          # URL base que emite os tokens
-          issuer-uri: http://localhost:8080/realms/ChainTracker
+          # URL base que emite os tokens.
+          # 8081 e a porta do Keycloak; 8080 e a porta do proprio Spring.
+          issuer-uri: http://localhost:8081/realms/ChainTracker
           # Endpoint onde o Spring baixa as chaves públicas para validar o JWT localmente
-          jwk-set-uri: http://localhost:8080/realms/ChainTracker/protocol/openid-connect/certs
+          jwk-set-uri: http://localhost:8081/realms/ChainTracker/protocol/openid-connect/certs
 security:
   client-secret: "gfRTzEHqLtpke6zZPZKWfdji6WMmJtJS99zxt0NJ8Cl5HRBjDui1ElOUkGtQGjkHf9k2Ir9nsYzYqiDlHo57tp"
