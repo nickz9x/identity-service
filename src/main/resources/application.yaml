@@ -23,4 +23,4 @@ spring:
       properties:
         spring.json.add.type.headers: false
 security:
-  client-secret: "lpOr9gxFb5u5rc7bSQbrZNQPYoSV8WJfW9b31cKYCeaPVEPdSFTBFCvNzZMdqc7mLiXAxfu4rvtfbrDBKyx10r"
+  client-secret: "gfRTzEHqLtpke6zZPZKWfdji6WMmJtJS99zxt0NJ8Cl5HRBjDui1ElOUkGtQGjkHf9k2Ir9nsYzYqiDlHo57tp"
