@@ -10,6 +10,8 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.web.SecurityFilterChain;
 
+import java.security.SecureRandom;
+
 @Configuration
 @EnableWebSecurity
 public class SecurityConfiguration {
@@ -28,4 +30,8 @@ public class SecurityConfiguration {
         return http.build();
     }
 
+    @Bean
+    public SecureRandom secureRandom(){
+        return new SecureRandom();
+    }
 }
