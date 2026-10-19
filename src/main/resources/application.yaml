@@ -15,5 +15,12 @@ spring:
           issuer-uri: http://localhost:8081/realms/ChainTracker
           # Endpoint onde o Spring baixa as chaves públicas para validar o JWT localmente
           jwk-set-uri: http://localhost:8081/realms/ChainTracker/protocol/openid-connect/certs
+  kafka:
+    producer:
+      bootstrap-servers: localhost:9092 # Ajuste para a sua porta/URL
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+      value-serializer: org.springframework.kafka.support.serializer.JsonSerializer
+      properties:
+        spring.json.add.type.headers: false
 security:
   client-secret: "lpOr9gxFb5u5rc7bSQbrZNQPYoSV8WJfW9b31cKYCeaPVEPdSFTBFCvNzZMdqc7mLiXAxfu4rvtfbrDBKyx10r"
