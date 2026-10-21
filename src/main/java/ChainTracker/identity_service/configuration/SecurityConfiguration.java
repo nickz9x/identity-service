@@ -27,7 +27,7 @@ public class SecurityConfiguration {
             auth.requestMatchers(HttpMethod.POST, "/api/auth/register", "/api/auth/login").permitAll();
             // Copia das rotas usadas pelo bot do Telegram, que nao carrega JWT.
             // As originais (/api/auth/**) continuam exigindo autenticacao.
-            auth.requestMatchers("/api/bot/**").permitAll();
+            auth.requestMatchers("/api/bot/**").hasAuthority("SCOPE_bot");
             auth.anyRequest().authenticated();
         });
         http.oauth2ResourceServer(oauth2 -> oauth2.jwt(Customizer.withDefaults()));
