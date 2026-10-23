@@ -12,9 +12,9 @@ spring:
         jwt:
           # URL base que emite os tokens.
           # 8081 e a porta do Keycloak; 8080 e a porta do proprio Spring.
-          issuer-uri: http://keycloak:8081/realms/ChainTracker
+          issuer-uri: http://keycloak:8080/realms/ChainTracker
           # Endpoint onde o Spring baixa as chaves públicas para validar o JWT localmente
-          jwk-set-uri: http://keycloak:8081/realms/ChainTracker/protocol/openid-connect/certs
+          jwk-set-uri: http://keycloak:8080/realms/ChainTracker/protocol/openid-connect/certs
   kafka:
     producer:
       bootstrap-servers: kafka:9092 # Ajuste para a sua porta/URL
