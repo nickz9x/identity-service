@@ -3,7 +3,7 @@ server:
 
 spring:
   datasource:
-    url: jdbc:postgresql://localhost:5432/identityService
+    url: jdbc:postgresql://identity-service-db:5432/identityService
     username: user
     password: postgres
   security:
@@ -12,15 +12,15 @@ spring:
         jwt:
           # URL base que emite os tokens.
           # 8081 e a porta do Keycloak; 8080 e a porta do proprio Spring.
-          issuer-uri: http://localhost:8081/realms/ChainTracker
+          issuer-uri: http://keycloak:8081/realms/ChainTracker
           # Endpoint onde o Spring baixa as chaves públicas para validar o JWT localmente
-          jwk-set-uri: http://localhost:8081/realms/ChainTracker/protocol/openid-connect/certs
+          jwk-set-uri: http://keycloak:8081/realms/ChainTracker/protocol/openid-connect/certs
   kafka:
     producer:
-      bootstrap-servers: localhost:9092 # Ajuste para a sua porta/URL
+      bootstrap-servers: kafka:9092 # Ajuste para a sua porta/URL
       key-serializer: org.apache.kafka.common.serialization.StringSerializer
       value-serializer: org.springframework.kafka.support.serializer.JsonSerializer
       properties:
         spring.json.add.type.headers: false
 security:
-  client-secret: "gfRTzEHqLtpke6zZPZKWfdji6WMmJtJS99zxt0NJ8Cl5HRBjDui1ElOUkGtQGjkHf9k2Ir9nsYzYqiDlHo57tp"
+  client-secret: ${KEYCLOAK_SECRET}
