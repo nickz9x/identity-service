@@ -12,10 +12,13 @@ public class KeycloakAdminConfiguration {
     @Value("${security.client-secret}")
     private String clientSecret;
 
+    @Value("${keycloak.url:http://keycloak:8080}")
+    private String keycloakUrl;
+
     @Bean
     public Keycloak keycloakAdmin(){
         return KeycloakBuilder.builder()
-                .serverUrl("http://localhost:8081")
+                .serverUrl(keycloakUrl)
                 .realm("ChainTracker")
                 .clientId("identity-service")
                 .clientSecret(clientSecret)

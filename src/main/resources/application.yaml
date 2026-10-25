@@ -6,6 +6,9 @@ spring:
     url: jdbc:postgresql://identity-service-db:5432/identityService
     username: user
     password: postgres
+  jpa:
+    hibernate:
+      ddl-auto: update
   security:
     oauth2:
       resourceserver:
