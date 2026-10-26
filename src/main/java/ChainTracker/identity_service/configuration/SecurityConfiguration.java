@@ -21,6 +21,7 @@ public class SecurityConfiguration {
         http.csrf(csrf -> csrf.disable());
         http.authorizeHttpRequests(auth -> {
             auth.requestMatchers("/error").permitAll();
+            auth.requestMatchers("/v3/api-docs/**", "/swagger-ui/**", "/swagger-ui.html", "/webjars/**").permitAll();
             auth.requestMatchers(HttpMethod.POST, "/api/auth/register", "/api/auth/login").permitAll();
             auth.requestMatchers("/api/bot/**").hasAuthority("SCOPE_bot");
             auth.anyRequest().authenticated();
